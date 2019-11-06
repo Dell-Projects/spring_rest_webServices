@@ -14,7 +14,7 @@ public class UserDAOService {
 
     //Using hardcoded array o users
     static {
-        users.add(new User(1, "Luccas", new Date()));
+        users.add(new User(1, "Fallavena", new Date()));
         users.add(new User(2, "Lipe", new Date()));
         users.add(new User(3, "Ju", new Date()));
         users.add(new User(4, "Sophia", new Date()));
