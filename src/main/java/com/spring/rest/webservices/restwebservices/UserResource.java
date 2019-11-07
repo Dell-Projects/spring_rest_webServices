@@ -1,8 +1,11 @@
 package com.spring.rest.webservices.restwebservices;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -23,7 +26,20 @@ public class UserResource {
 
     //POST method
     @PostMapping("/users")
-    public void createUser(@RequestBody User newUser){
+    public ResponseEntity createUser(@RequestBody User newUser){
+
+        //Create response that says in the POST response where the user has been created
+        URI location =  ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(newUser.getId()).toUri();
         User savedUser = userDAOService.save(newUser);
+
+        return ResponseEntity.created(location).build();
     }
+
+//    //DELETE method
+//    public void deleteUser(User userToDelete){
+//        userDAOService.
+//    }
 }
