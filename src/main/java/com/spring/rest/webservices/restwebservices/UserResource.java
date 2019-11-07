@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Iterator;
 import java.util.List;
 
 @RestController
@@ -23,10 +24,8 @@ public class UserResource {
     public User retrieveUserById(@PathVariable int id){
 
         User user = userDAOService.findById(id);
-
         if(user == null)
             throw new UserNotFoundException("id not found: " + id);
-
         return user;
     }
 
@@ -44,8 +43,12 @@ public class UserResource {
         return ResponseEntity.created(location).build();
     }
 
-//    //DELETE method
-//    public void deleteUser(User userToDelete){
-//        userDAOService.
-//    }
+    //DELETE method
+    @DeleteMapping("/users/{id}")
+    public User deleteUser(@PathVariable int id){
+        User user = userDAOService.deleteById(id);
+        if(user == null)
+            throw new UserNotFoundException("id not found: " + id);
+        return user;
+    }
 }
