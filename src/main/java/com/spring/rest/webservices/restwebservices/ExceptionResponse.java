@@ -2,7 +2,6 @@ package com.spring.rest.webservices.restwebservices;
 
 import java.util.Date;
 
-
 public class ExceptionResponse {
 
     private Date timestamp;

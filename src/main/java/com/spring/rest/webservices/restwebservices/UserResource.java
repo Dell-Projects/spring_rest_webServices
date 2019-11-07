@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.Iterator;
 import java.util.List;
@@ -31,7 +32,7 @@ public class UserResource {
 
     //POST method
     @PostMapping("/users")
-    public ResponseEntity createUser(@RequestBody User newUser){
+    public ResponseEntity createUser(@Valid @RequestBody User newUser){
 
         //Create response that says in the POST response where the user has been created
         URI location =  ServletUriComponentsBuilder
