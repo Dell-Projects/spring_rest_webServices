@@ -1,5 +1,6 @@
 package com.spring.rest.webservices.restwebservices;
 
+import jdk.internal.loader.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,7 @@ public class UserResource {
         User user = userDAOService.findById(id);
         if(user == null)
             throw new UserNotFoundException("id not found: " + id);
+
         return user;
     }
 
