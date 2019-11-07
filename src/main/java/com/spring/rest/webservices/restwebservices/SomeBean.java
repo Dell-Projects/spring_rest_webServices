@@ -1,8 +1,13 @@
 package com.spring.rest.webservices.restwebservices;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties(value={"field3"})
+//This is used to static filtering
+//@JsonIgnoreProperties(value={"field3"})
+
+//This is used to dynamic filtering
+@JsonFilter("SomeBeanFilter")
 public class SomeBean {
     private String field1;
     private String field2;
