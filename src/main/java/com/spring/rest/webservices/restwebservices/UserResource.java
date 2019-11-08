@@ -2,6 +2,7 @@ package com.spring.rest.webservices.restwebservices;
 
 import jdk.internal.loader.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -18,7 +19,7 @@ public class UserResource {
     private UserDAOService userDAOService;
 
     //GET methods
-    @GetMapping("/users")
+    @GetMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<User> retrieveAllUsers(){
         return userDAOService.findAll();
     }
