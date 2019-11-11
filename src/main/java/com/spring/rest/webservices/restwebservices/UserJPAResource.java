@@ -1,8 +1,6 @@
 package com.spring.rest.webservices.restwebservices;
 
-import jdk.internal.loader.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.server.mvc.ControllerLinkBuilder;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,15 +8,11 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 public class UserJPAResource {
-
-    @Autowired
-    private UserDAOService userDAOService;
 
     @Autowired
     private UserRepository userRepository;
@@ -49,17 +43,14 @@ public class UserJPAResource {
                 .fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(newUser.getId()).toUri();
-        User savedUser = userDAOService.save(newUser);
+        User savedUser = userRepository.save(newUser);
 
         return ResponseEntity.created(location).build();
     }
 
     //DELETE method
     @DeleteMapping("/jpa/users/{id}")
-    public User deleteUser(@PathVariable int id){
-        User user = userDAOService.deleteById(id);
-        if(user == null)
-            throw new UserNotFoundException("id not found: " + id);
-        return user;
+    public void deleteUser(@PathVariable int id){
+        userRepository.deleteById(id);
     }
 }
