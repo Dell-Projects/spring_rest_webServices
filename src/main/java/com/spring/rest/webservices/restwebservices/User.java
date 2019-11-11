@@ -5,9 +5,11 @@ import org.springframework.hateoas.RepresentationModel;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class User extends RepresentationModel<User> {
@@ -19,6 +21,8 @@ public class User extends RepresentationModel<User> {
     private String name;
     @Past(message = "Date must be in the past")
     private Date birthDay;
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts;
 
     protected User(){}
 
@@ -50,6 +54,14 @@ public class User extends RepresentationModel<User> {
 
     public void setBirthDay(Date birthDay) {
         this.birthDay = birthDay;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 
     @Override
